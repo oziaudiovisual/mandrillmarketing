@@ -1,0 +1,26 @@
+steps:
+  # 1. Build da imagem Docker
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'southamerica-east1-docker.pkg.dev/$PROJECT_ID/containers/mandrill-marketing:$COMMIT_SHA', '-t', 'southamerica-east1-docker.pkg.dev/$PROJECT_ID/containers/mandrill-marketing:latest', '.']
+
+  # 2. Push da imagem para o Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'southamerica-east1-docker.pkg.dev/$PROJECT_ID/containers/mandrill-marketing:latest']
+
+  # 3. Deploy no Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'mandrill-marketing'
+      - '--image'
+      - 'southamerica-east1-docker.pkg.dev/$PROJECT_ID/containers/mandrill-marketing:latest'
+      - '--region'
+      - 'southamerica-east1'
+      - '--allow-unauthenticated'
+      - '--set-env-vars'
+      - 'API_KEY=$_API_KEY'
+
+images:
+  - 'southamerica-east1-docker.pkg.dev/$PROJECT_ID/containers/mandrill-marketing:latest'
