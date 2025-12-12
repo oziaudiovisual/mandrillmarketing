@@ -5,7 +5,7 @@
 | Item | Valor |
 |------|-------|
 | **Projeto GCP** | `mandrill-marketing-90970` |
-| **Região** | `southamerica-east1` (São Paulo) |
+| **Região** | `us-central1` (EUA) |
 
 ---
 
@@ -39,7 +39,7 @@ gcloud config set project mandrill-marketing-90970
 ```bash
 gcloud run deploy mandrill-marketing \
   --source . \
-  --region southamerica-east1 \
+  --region us-central1 \
   --allow-unauthenticated \
   --set-env-vars "API_KEY=SUA_CHAVE_GEMINI"
 ```

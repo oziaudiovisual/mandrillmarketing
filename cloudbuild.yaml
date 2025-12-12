@@ -17,7 +17,7 @@ steps:
       - '--image'
       - 'southamerica-east1-docker.pkg.dev/$PROJECT_ID/containers/mandrill-marketing:latest'
       - '--region'
-      - 'southamerica-east1'
+      - 'us-central1'
       - '--allow-unauthenticated'
       - '--set-env-vars'
       - 'API_KEY=$_API_KEY'
