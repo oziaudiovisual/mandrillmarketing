@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const { Storage } = require('@google-cloud/storage');
 const { google } = require('googleapis');
 const cors = require('cors');
@@ -12,12 +13,12 @@ app.use(express.json());
 app.use(cors());
 
 // Servir arquivos estáticos do React (Vite build)
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'dist'), { index: false }));
 
 // --- HEALTH CHECK (Cloud Run) ---
 app.get('/health', (req, res) => {
-  res.status(200).json({ 
-    status: 'ok', 
+  res.status(200).json({
+    status: 'ok',
     timestamp: new Date().toISOString(),
     uptime: process.uptime()
   });
@@ -37,7 +38,7 @@ app.post('/api/upload-youtube', async (req, res) => {
     // 1. Configurar Cliente YouTube
     const oauth2Client = new google.auth.OAuth2();
     oauth2Client.setCredentials({ access_token: accessToken });
-    
+
     const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
 
     // 2. Obter referência do arquivo no Storage
@@ -57,7 +58,7 @@ app.post('/api/upload-youtube', async (req, res) => {
       privacyStatus: metadata.publishAt ? 'private' : (metadata.privacyStatus || 'public'),
       selfDeclaredMadeForKids: false
     };
-    
+
     if (metadata.publishAt) {
       status.publishAt = metadata.publishAt;
     }
@@ -80,8 +81,8 @@ app.post('/api/upload-youtube', async (req, res) => {
     });
 
     console.log(`[Upload] Sucesso! ID: ${response.data.id}`);
-    
-    res.json({ 
+
+    res.json({
       id: response.data.id,
       status: 'success'
     });
@@ -95,7 +96,25 @@ app.post('/api/upload-youtube', async (req, res) => {
 
 // --- FALLBACK SPA ---
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  // Ignora chamadas de API que não deram match
+  if (req.path.startsWith('/api') || req.path.includes('.')) {
+    return res.status(404).end();
+  }
+
+  const filePath = path.join(__dirname, 'dist', 'index.html');
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Erro ao ler index.html:', err);
+      return res.status(500).send('Erro interno no servidor');
+    }
+
+    // Injeta a API Key do ambiente (configurada no Cloud Run/Build)
+    const apiKey = process.env.API_KEY || '';
+    const html = data.replace('__API_KEY_PLACEHOLDER__', apiKey);
+
+    res.send(html);
+  });
 });
 
 const PORT = process.env.PORT || 8080;
