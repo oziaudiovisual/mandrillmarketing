@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Global Configuration Object populated by server.js at runtime
+      window.APP_CONFIG = {
+        API_KEY: "__API_KEY_PLACEHOLDER__",
+        // COLOQUE SEU CLIENT ID AQUI ABAIXO
+        GOOGLE_CLIENT_ID: "514007768640-qocst166n94ojg3hm0ehdsc3e3bqisla.apps.googleusercontent.com" 
+      };
+    </script>
+    <style>
+      @font-face {
+        font-family: 'Recoleta';
+        src: url('https://firebasestorage.googleapis.com/v0/b/mandrill-marketing-90970.firebasestorage.app/o/sistema%2FRecoleta-Medium.woff?alt=media') format('woff');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      html {
+        overflow-y: scroll; /* Forces scrollbar to be always visible to prevent layout shift */
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #101110;
+        color: #E3E3E3;
+        font-size: 16px; /* Base font size increased to 16px */
+      }
+      ::selection {
+        background-color: rgba(254, 106, 15, 0.3);
+        color: #ffffff;
+      }
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #101110; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #444746; 
+        border-radius: 5px;
+        border: 2px solid #101110;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #5E5E5E; 
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      .animate-fadeIn {
+        animation: fadeIn 0.4s ease-out forwards;
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.6.0/",
+    "vite": "https://aistudiocdn.com/vite@^7.2.6",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.1",
+    "axios": "https://esm.sh/axios@^1.13.2",
+    "googleapis": "https://esm.sh/googleapis@^168.0.0",
+    "firebase-functions": "https://esm.sh/firebase-functions@^7.0.1",
+    "firebase-functions/": "https://esm.sh/firebase-functions@^7.0.1/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

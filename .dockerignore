@@ -1,0 +1,41 @@
+# Dependencies
+node_modules
+
+# Build output (will be rebuilt in Docker)
+dist
+
+# Version control
+.git
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# Logs
+*.log
+logs
+
+# Environment files (secrets)
+.env
+.env.*
+*.local
+
+# IDE/Editor
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+*.test.js
+*.test.ts
+__tests__
+
+# Docker files (avoid recursion)
+Dockerfile*
+docker-compose*

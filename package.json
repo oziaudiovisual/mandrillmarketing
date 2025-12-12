@@ -1,0 +1,34 @@
+{
+  "name": "mandrill-marketing",
+  "version": "1.0.0",
+  "description": "Mandrill Marketing Dashboard",
+  "main": "server.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node server.js",
+    "docker:build": "docker build -t mandrill-marketing .",
+    "docker:run": "docker run -p 8080:8080 --env-file .env.local mandrill-marketing"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^7.7.0",
+    "@google/genai": "^1.31.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase": "^10.8.0",
+    "googleapis": "^128.0.0",
+    "lucide-react": "^0.344.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recharts": "^2.12.0",
+    "vite": "^5.1.4",
+    "typescript": "^5.3.3",
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1"
+  }
+}
